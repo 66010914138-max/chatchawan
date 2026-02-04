@@ -1,1 +1,1 @@
-$con = mysqli_connect("localhost", "root", "", "ชื่อฐานข้อมูลของคุณ");
+$con = mysqli_connect("localhost", "root", "Golf@2004", "ชื่อฐานข้อมูลของคุณ");
