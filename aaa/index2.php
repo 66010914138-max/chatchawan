@@ -1,37 +1,74 @@
 <?php
     session_start();
-    
-    // ตรวจสอบว่าถ้าไม่มีค่า Session 'aid' (ไม่ได้ Login มา) ให้ดีดกลับไปหน้า index.php
     if(empty($_SESSION['aid'])){
-        echo "Access Denied! กำลังกลับไปหน้าเข้าสู่ระบบ...";
-        // แก้ไข http-equiv และปิดเครื่องหมายคำพูดให้ถูกต้องเพื่อให้ Meta Refresh ทำงาน
-        echo "<meta http-equiv='refresh' content='3;url=index.php'>"; 
+        echo "<div style='text-align:center; padding:50px; font-family:sans-serif;'>";
+        echo "<h4>Access Denied!</h4><p>กำลังกลับไปหน้าเข้าสู่ระบบ...</p></div>";
+        echo "<meta http-equiv='refresh' content='2;url=index.php'>"; 
         exit;
     }
 ?>
 <!doctype html>
-<html>
+<html lang="th">
 <head>
-<meta charset="utf-8">
-<title>หน้าหลักแอดมิน - ชัชวาล</title>
-<style>
-    /* ปรับแต่ง List ให้น่ากดมากขึ้น */
-    ul { list-style: none; padding: 0; }
-    li { background: #f0f0f0; margin: 5px; padding: 10px; width: 200px; border-radius: 4px; }
-    a { text-decoration: none; color: #333; }
-    li:hover { background: #e0e0e0; }
-</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard - ชัชวาล</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f7f6; }
+        .navbar { background-color: #ffffff; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .menu-card { transition: transform 0.2s; border: none; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .menu-card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+        .menu-link { text-decoration: none; color: inherit; }
+    </style>
 </head>
-
 <body>
-<h1>หน้าหลักแอดมิน - ชัชวาล</h1>
-<p><strong>ยินดีต้อนรับแอดมิน:</strong> <?php echo $_SESSION['aname']; ?></p>
-<hr>
-<ul>
-    <a href="products.php"><li>📦 จัดการสินค้า</li></a>
-    <a href="orders.php"><li>📝 จัดการคำสั่งซื้อ</li></a>
-    <a href="costomers.php"><li>👥 จัดการลูกค้า</li></a>
-    <a href="logout.php"><li style="color:red;">🚪 ออกจากระบบ</li></a>
-</ul>
+
+<nav class="navbar navbar-expand-lg mb-4">
+    <div class="container">
+        <span class="navbar-brand fw-bold text-primary">Admin Panel</span>
+        <div class="ms-auto">
+            <span class="me-3 text-muted">ผู้ใช้งาน: <strong><?php echo $_SESSION['aname']; ?></strong></span>
+            <a href="logout.php" class="btn btn-outline-danger btn-sm">ออกจากระบบ</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h2 class="mb-4">ยินดีต้อนรับ, คุณชัชวาล</h2>
+    
+    <div class="row g-4">
+        <div class="col-md-4">
+            <a href="products.php" class="menu-link">
+                <div class="card menu-card p-4 text-center">
+                    <div class="display-5 mb-2">📦</div>
+                    <h5>จัดการสินค้า</h5>
+                    <small class="text-muted">เพิ่ม ลบ แก้ไข รายการสินค้า</small>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="orders.php" class="menu-link">
+                <div class="card menu-card p-4 text-center">
+                    <div class="display-5 mb-2">📝</div>
+                    <h5>จัดการคำสั่งซื้อ</h5>
+                    <small class="text-muted">ตรวจสอบรายการที่ลูกค้าสั่ง</small>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="costomers.php" class="menu-link">
+                <div class="card menu-card p-4 text-center">
+                    <div class="display-5 mb-2">👥</div>
+                    <h5>จัดการลูกค้า</h5>
+                    <small class="text-muted">ดูข้อมูลสมาชิกและผู้ใช้งาน</small>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
