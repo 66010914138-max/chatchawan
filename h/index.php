@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>ชัชวาล สิงห์เทศ (แบงค์)</title>
+    <title>ชัชวาล สิงห์เทศ(แบงค์)</title>
 </head>
 <body>
     <h1>หน้าเข้าสู่ระบบ</h1>
