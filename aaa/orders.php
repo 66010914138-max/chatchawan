@@ -1,12 +1,22 @@
 <?php
     session_start();
     
-    // 1. ตรวจสอบพาธไฟล์เชื่อมต่อ (ลองใช้แบบระบุตำแหน่งให้ชัดเจน)
-    $include_path = "../connectdb.php";
+    // ตรวจสอบพาธไฟล์เชื่อมต่อ
+    $include_path = "../connectdb.php"; 
+    
+    // ถ้าหาชั้นเดียวไม่เจอ ให้ลองถอยออกไปอีกชั้น (กันเหนียว)
+    if (!file_exists($include_path)) {
+        $include_path = "../../connectdb.php";
+    }
+
     if (file_exists($include_path)) {
         include_once($include_path);
     } else {
-        die("Error: ไม่พบไฟล์ connectdb.php ในตำแหน่ง $include_path");
+        // หากยังไม่เจออีก ให้แจ้งเตือนพร้อมบอกตำแหน่งปัจจุบันที่ระบบหาอยู่
+        die("<div style='color:red; padding:20px; border:1px solid red; background:#fff;'>
+                <b>Error:</b> ไม่พบไฟล์เชื่อมต่อฐานข้อมูล<br>
+                ตำแหน่งปัจจุบันของไฟล์นี้: " . __FILE__ . "
+             </div>");
     }
 
     if(empty($_SESSION['aid'])){
@@ -24,54 +34,62 @@
 </head>
 <body class="bg-light">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="index2.php">⬅️ กลับหน้า Dashboard</a>
+        <a class="navbar-brand fw-bold" href="index2.php">⬅️ กลับหน้า Dashboard</a>
     </div>
 </nav>
 
 <div class="container">
-    <h2 class="mb-4">📋 รายการคำสั่งซื้อ</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>📋 รายการคำสั่งซื้อ</h2>
+        <span class="badge bg-primary text-wrap">แอดมิน: <?php echo $_SESSION['aname']; ?></span>
+    </div>
 
-    <div class="card border-0 shadow-sm">
+    <div class="card border-0 shadow-sm rounded-3">
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-hover align-middle">
-                    <thead class="table-light">
+                    <thead class="table-primary">
                         <tr>
                             <th>เลขที่สั่งซื้อ</th>
-                            <th>ยอดรวม</th>
-                            <th>สถานะ</th>
-                            <th>จัดการ</th>
+                            <th>ยอดรวมสุทธิ</th>
+                            <th>สถานะการชำระ</th>
+                            <th class="text-center">การจัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                            // 2. เช็กชื่อตาราง: ตรวจสอบใน phpMyAdmin ว่าคุณมีตารางชื่อ orders หรือไม่
+                            // ตรวจสอบชื่อตัวแปรเชื่อมต่อใน connectdb.php ด้วย (ปกติคือ $conn หรือ $con)
+                            // ในที่นี้ใช้ $conn ตามโค้ดที่คุณส่งมา
                             $sql = "SELECT * FROM orders ORDER BY oid DESC";
-                            $rs = mysqli_query($conn, $sql);
+                            $rs = @mysqli_query($conn, $sql);
 
                             if ($rs && mysqli_num_rows($rs) > 0) {
                                 while($row = mysqli_fetch_array($rs)) {
                         ?>
                         <tr>
-                            <td>#<?php echo $row['oid']; ?></td>
+                            <td class="fw-bold">#<?php echo str_pad($row['oid'], 5, "0", STR_PAD_LEFT); ?></td>
                             <td><?php echo number_format($row['o_total'], 2); ?> ฿</td>
                             <td>
-                                <?php echo ($row['o_status'] == 1) ? "✅ ชำระแล้ว" : "⏳ รอชำระเงิน"; ?>
+                                <?php if($row['o_status'] == 1): ?>
+                                    <span class="badge bg-success">✅ ชำระเงินแล้ว</span>
+                                <?php else: ?>
+                                    <span class="badge bg-warning text-dark">⏳ รอการตรวจสอบ</span>
+                                <?php endif; ?>
                             </td>
-                            <td>
-                                <button class="btn btn-info btn-sm text-white">ดูรายละเอียด</button>
+                            <td class="text-center">
+                                <button class="btn btn-outline-info btn-sm">รายละเอียด</button>
+                                <button class="btn btn-outline-danger btn-sm">ลบ</button>
                             </td>
                         </tr>
                         <?php 
                                 }
                             } else {
-                                // ถ้า Query ล้มเหลว ให้แสดง error เพื่อจะได้รู้ว่าพังที่จุดไหน
                                 if (!$rs) {
-                                    echo "<tr><td colspan='4' class='text-danger'>SQL Error: " . mysqli_error($conn) . "</td></tr>";
+                                    echo "<tr><td colspan='4' class='alert alert-danger'>SQL Error: " . mysqli_error($conn) . " (เช็คชื่อตารางใน DB)</td></tr>";
                                 } else {
-                                    echo "<tr><td colspan='4' class='text-center py-4 text-muted'>ยังไม่มีรายการสั่งซื้อ</td></tr>";
+                                    echo "<tr><td colspan='4' class='text-center py-5 text-muted'>ไม่มีรายการสั่งซื้อในขณะนี้</td></tr>";
                                 }
                             }
                         ?>
