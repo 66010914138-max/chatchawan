@@ -8,6 +8,7 @@
 <body>
 <h1>ชัชวาล สิงห์เทศ(แบงค์)</h1>
 
-<img src="img/1.jpg" width="100" >
+<img src="img/1.jpg" width="200" >
 </body>
 </html>
+
