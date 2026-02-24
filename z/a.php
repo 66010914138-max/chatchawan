@@ -1,44 +1,32 @@
 <?php
-// 1. ส่วนเชื่อมต่อฐานข้อมูล (เขียนแบบง่ายๆ บรรทัดเดียว)
-$conn = mysqli_connect("localhost", "root", "", "4138db");
+// เชื่อมต่อฐานข้อมูล (เปลี่ยนชื่อตามภาพของคุณ)
+$conn = mysqli_connect("localhost", "root", "Golf@2004", "4138db");
 
-// 2. ส่วนเช็คการกดปุ่มส่งข้อมูล
-if(isset($_POST['save_data'])) {
+// ถ้ามีการกดปุ่ม name="btn_save"
+if(isset($_POST['btn_save'])) {
     $name = $_POST['fullname'];
     $type = $_POST['sport_type'];
-    $detail = $_POST['note'];
+    $note = $_POST['note'];
 
-    // คำสั่งเพิ่มข้อมูล
-    $sql = "INSERT INTO db_athlete (fullname, sport_type, note) VALUES ('$name', '$type', '$detail')";
+    $sql = "INSERT INTO db_athlete (fullname, sport_type, note) VALUES ('$name', '$type', '$note')";
     
     if(mysqli_query($conn, $sql)) {
-        echo "<script>alert('บันทึกสำเร็จ');</script>";
+        echo "<h3 style='color:green;'>บันทึกข้อมูลเรียบร้อยแล้ว!</h3>";
+    } else {
+        echo "ผิดพลาด: " . mysqli_error($conn);
     }
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>ลงทะเบียนนักกีฬา</title>
-</head>
-<body>
-
-    <h2>เพิ่มข้อมูลนักกีฬา</h2>
+<form method="post" action="a.php">
+    ชื่อนักกีฬา: <input type="text" name="fullname" required> <br><br>
     
-    <form method="post" action="">
-        ชื่อ-นามสกุล: <br>
-        <input type="text" name="fullname" required> <br><br>
-
-        ประเภทกีฬา: <br>
-        <input type="radio" name="sport_type" value="ประเภทเดี่ยว" checked> ประเภทเดี่ยว
-        <input type="radio" name="sport_type" value="ประเภททีม"> ประเภททีม <br><br>
-
-        รายละเอียด/หมายเหตุ: <br>
-        <textarea name="note" rows="4" cols="30"></textarea> <br><br>
-
-        <button type="submit" name="save_data">กดบันทึกข้อมูล</button>
-    </form>
-
-</body>
-</html>
+    ประเภท: 
+    <input type="radio" name="sport_type" value="เดี่ยว" checked> เดี่ยว
+    <input type="radio" name="sport_type" value="ทีม"> ทีม <br><br>
+    
+    หมายเหตุ: <br>
+    <textarea name="note"></textarea> <br><br>
+    
+    <button type="submit" name="btn_save">บันทึกข้อมูล</button>
+</form>
