@@ -1,34 +1,27 @@
 <?php
-// เปิดการแสดง Error ทั้งหมด (เผื่อเอาไว้ดูว่าผิดบรรทัดไหน)
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
-// 1. เชื่อมต่อฐานข้อมูล (อิงตามรูป phpMyAdmin ของคุณ)
-$conn = mysqli_connect("localhost", "root", "Golf@2004", "4138db");
+// 1. ส่วนเชื่อมต่อฐานข้อมูล (รวมจาก connect.php มาไว้ที่นี่)
+$conn = mysqli_connect("localhost", "root", "Golff@2004", "4138db");
 
 if (!$conn) {
     die("เชื่อมต่อฐานข้อมูลล้มเหลว: " . mysqli_connect_error());
 }
 
-// 2. รับค่าจากฟอร์ม (ต้องมั่นใจว่าชื่อในฟอร์มตรงกัน)
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $fullname = $_POST['athlete_name'];
-    $sport_type = $_POST['sport_type'];
-    $note = $_POST['description'];
+// 2. รับค่าจากหน้าฟอร์ม a.php
+$name = $_POST['fullname'];
+$type = $_POST['sport_type'];
+$detail = $_POST['note'];
 
-    // 3. คำสั่ง SQL (ชื่อตารางของคุณคือ db_athlete)
-    $sql = "INSERT INTO db_athlete (fullname, sport_type, note) VALUES ('$fullname', '$sport_type', '$note')";
+// 3. คำสั่ง SQL เพิ่มข้อมูลลงตาราง db_athlete
+$sql = "INSERT INTO db_athlete (fullname, sport_type, note) VALUES ('$name', '$type', '$detail')";
 
-    if (mysqli_query($conn, $sql)) {
-        echo "<h1>บันทึกข้อมูลสำเร็จ!</h1>";
-        echo "<p>ข้อมูลนักกีฬา $fullname ถูกบันทึกลงฐานข้อมูลเรียบร้อย</p>";
-        echo "<a href='register.php'>กลับหน้าลงทะเบียน</a>";
-    } else {
-        echo "เกิดข้อผิดพลาดในการบันทึก: " . mysqli_error($conn);
-    }
+// 4. สั่งให้บันทึกและแจ้งผล
+if (mysqli_query($conn, $sql)) {
+    echo "<h3>บันทึกข้อมูลลงฐานข้อมูลสำเร็จ!</h3>";
+    echo "<a href='a.php'>กลับไปหน้าลงทะเบียน</a>";
 } else {
-    echo "กรุณาส่งข้อมูลผ่านฟอร์มเท่านั้น";
+    echo "เกิดข้อผิดพลาด: " . mysqli_error($conn);
 }
 
+// ปิดการเชื่อมต่อ
 mysqli_close($conn);
 ?>
