@@ -1,51 +1,53 @@
 <!DOCTYPE html>
-<html lang="th">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>ระบบลงทะเบียนนักกีฬา</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>ลงทะเบียนนักกีฬา</title>
     <style>
-        body { background-color: #f4f7f6; font-family: 'Tahoma', sans-serif; }
-        .container { max-width: 500px; margin-top: 50px; }
-        .card { padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        /* ตกแต่งแบบง่ายๆ ให้ดูเป็นระเบียบ */
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; color: #333; }
+        .form-box { width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        h2 { text-align: center; }
+        
+        /* ตกแต่งปุ่มสมัครสมาชิกให้มีสีสันตามโจทย์ (2 คะแนน) */
+        .btn-submit { 
+            background-color: #0056b3; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 4px; 
+            cursor: pointer;
+            width: 100%;
+        }
+        .btn-submit:hover { background-color: #004494; }
+        
+        input[type="text"], textarea { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ddd; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="card">
-        <h4 class="text-center mb-4">ลงทะเบียนนักกีฬา</h4>
-        
-        <form action="save.php" method="POST">
-            
-            <div class="mb-3">
-                <label class="form-label">ชื่อ-นามสกุล:</label>
-                <input type="text" name="fullname" class="form-control" placeholder="ระบุชื่อของคุณ" required>
-            </div>
+<div class="form-box">
+    <h2>ลงทะเบียนนักกีฬา</h2>
 
-            <div class="mb-3">
-                <label class="form-label d-block">ประเภทกีฬา:</label>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sport_type" value="ประเภทเดี่ยว" checked>
-                    <label class="form-check-label">ประเภทเดี่ยว</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="sport_type" value="ประเภททีม">
-                    <label class="form-check-label">ประเภททีม</label>
-                </div>
-            </div>
+    <form action="save.php" method="POST">
+        <p>
+            ชื่อ-นามสกุล: <br>
+            <input type="text" name="fullname" required>
+        </p>
 
-            <div class="mb-3">
-                <label class="form-label">ประวัติหรือข้อมูลเพิ่มเติม:</label>
-                <textarea name="note" class="form-control" rows="3" placeholder="กรอกข้อมูล..."></textarea>
-            </div>
+        <p>
+            ประเภทกีฬา: <br>
+            <input type="radio" name="sport_type" value="ประเภทเดี่ยว" checked> ประเภทเดี่ยว
+            <input type="radio" name="sport_type" value="ประเภททีม"> ประเภททีม
+        </p>
 
-            <div class="d-grid">
-                <button type="submit" class="btn btn-primary">สมัครสมาชิกนักกีฬา</button>
-            </div>
+        <p>
+            ประวัติ/หมายเหตุ: <br>
+            <textarea name="note" rows="4"></textarea>
+        </p>
 
-        </form>
-    </div>
+        <button type="submit" class="btn-submit">สมัครสมาชิกนักกีฬา</button>
+    </form>
 </div>
 
 </body>
