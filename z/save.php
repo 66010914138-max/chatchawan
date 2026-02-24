@@ -1,6 +1,6 @@
 <?php
 // 1. ส่วนเชื่อมต่อฐานข้อมูล (รวมจาก connect.php มาไว้ที่นี่)
-$conn = mysqli_connect("localhost", "root", "Golff@2004", "4138db");
+$conn = mysqli_connect("localhost", "root", "Golf@2004", "4138db");
 
 if (!$conn) {
     die("เชื่อมต่อฐานข้อมูลล้มเหลว: " . mysqli_connect_error());
@@ -25,3 +25,4 @@ if (mysqli_query($conn, $sql)) {
 // ปิดการเชื่อมต่อ
 mysqli_close($conn);
 ?>
+
