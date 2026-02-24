@@ -1,48 +1,44 @@
+<?php
+// 1. ส่วนเชื่อมต่อฐานข้อมูล (เขียนแบบง่ายๆ บรรทัดเดียว)
+$conn = mysqli_connect("localhost", "root", "", "4138db");
+
+// 2. ส่วนเช็คการกดปุ่มส่งข้อมูล
+if(isset($_POST['save_data'])) {
+    $name = $_POST['fullname'];
+    $type = $_POST['sport_type'];
+    $detail = $_POST['note'];
+
+    // คำสั่งเพิ่มข้อมูล
+    $sql = "INSERT INTO db_athlete (fullname, sport_type, note) VALUES ('$name', '$type', '$detail')";
+    
+    if(mysqli_query($conn, $sql)) {
+        echo "<script>alert('บันทึกสำเร็จ');</script>";
+    }
+}
+?>
+
 <!DOCTYPE html>
-<html lang="th">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>ระบบลงทะเบียนนักกีฬา</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>ลงทะเบียนนักกีฬา</title>
 </head>
-<body class="bg-light">
+<body>
 
-<div class="container mt-5">
-    <div class="card shadow-sm mx-auto" style="max-width: 500px;">
-        <div class="card-body">
-            <h3 class="card-title text-center mb-4">ลงทะเบียนนักกีฬา</h3>
-            
-            <form action="save.php" method="POST">
-                <div class="mb-3">
-                    <label class="form-label">ชื่อ-นามสกุล:</label>
-                    <input type="text" name="athlete_name" class="form-control" placeholder="ระบุชื่อนักกีฬา" required>
-                </div>
+    <h2>เพิ่มข้อมูลนักกีฬา</h2>
+    
+    <form method="post" action="">
+        ชื่อ-นามสกุล: <br>
+        <input type="text" name="fullname" required> <br><br>
 
-                <div class="mb-3">
-                    <label class="form-label d-block">ประเภทกีฬา:</label>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sport_type" value="Individual" checked>
-                        <label class="form-check-label">ประเภทเดี่ยว</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sport_type" value="Team">
-                        <label class="form-check-label">ประเภททีม</label>
-                    </div>
-                </div>
+        ประเภทกีฬา: <br>
+        <input type="radio" name="sport_type" value="ประเภทเดี่ยว" checked> ประเภทเดี่ยว
+        <input type="radio" name="sport_type" value="ประเภททีม"> ประเภททีม <br><br>
 
-                <div class="mb-3">
-                    <label class="form-label">ประวัติหรือข้อมูลเพิ่มเติม:</label>
-                    <textarea name="description" class="form-control" rows="3" placeholder="ระบุรายละเอียด..."></textarea>
-                </div>
+        รายละเอียด/หมายเหตุ: <br>
+        <textarea name="note" rows="4" cols="30"></textarea> <br><br>
 
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg">สมัครสมาชิกนักกีฬา</button>
-                </div>
-            </form>
-            
-        </div>
-    </div>
-</div>
+        <button type="submit" name="save_data">กดบันทึกข้อมูล</button>
+    </form>
 
 </body>
 </html>
