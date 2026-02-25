@@ -9,8 +9,8 @@
         h2 { text-align: center; color: #333; }
         
         /* แก้ไข class ปุ่มจาก "red" เป็น "btn" เพื่อให้สีแสดงผลตาม CSS ที่ตั้งไว้ */
-        .btn { 
-            background-color: #007bff; 
+        .btn-info{ 
+            background-color: #f34612; 
             color: white; 
             border: none; 
             padding: 10px; 
@@ -18,7 +18,7 @@
             border-radius: 4px; 
             cursor: pointer; 
         }
-        .btn:hover { background-color: #0056b3; }
+        .btn:hover { background-color: #af1b08; }
         
         input[type="text"], textarea { width: 100%; padding: 8px; margin: 5px 0 15px 0; border: 1px solid #ccc; box-sizing: border-box; }
     </style>
@@ -47,6 +47,7 @@
 
 </body>
 </html>
+
 
 
 
