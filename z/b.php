@@ -30,6 +30,8 @@
     <form action="save.php" method="POST">
         ชื่อ-นามสกุล:
         <input type="text" name="fullname" required>
+        เบอร์โทรศัพท์:
+        <input type="text" name="phone" required>
 
         สังกัด / จังหวัด:
         <input type="text" name="team_name" placeholder="เช่น สโมสร A หรือ กรุงเทพฯ">
@@ -47,6 +49,7 @@
 
 </body>
 </html>
+
 
 
 
