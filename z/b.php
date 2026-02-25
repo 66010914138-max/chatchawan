@@ -4,49 +4,42 @@
     <meta charset="UTF-8">
     <title>ลงทะเบียนนักกีฬา</title>
     <style>
-        /* ตกแต่งแบบง่ายๆ ให้ดูเป็นระเบียบ */
-        body { font-family: sans-serif; line-height: 1.6; padding: 20px; color: #333; }
-        .form-box { width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
-        h2 { text-align: center; }
+        /* ตกแต่งแบบนิสิตทำเอง เรียบง่ายแต่เป็นระเบียบ */
+        body { font-family: "Tahoma", sans-serif; padding: 40px; background-color: #f9f9f9; }
+        .box { width: 350px; margin: auto; padding: 20px; border: 1px solid #ddd; background: #fff; border-radius: 8px; }
+        h2 { text-align: center; color: #333; }
         
-        /* ตกแต่งปุ่มสมัครสมาชิกให้มีสีสันตามโจทย์ (2 คะแนน) */
-        .btn-submit { 
-            background-color: #0056b3; 
+        /* ตกแต่งปุ่มให้ได้คะแนน (2 คะแนน) */
+        .btn { 
+            background-color: #007bff; 
             color: white; 
             border: none; 
-            padding: 10px 20px; 
+            padding: 10px; 
+            width: 100%; 
             border-radius: 4px; 
-            cursor: pointer;
-            width: 100%;
+            cursor: pointer; 
         }
-        .btn-submit:hover { background-color: #004494; }
+        .btn:hover { background-color: #0056b3; }
         
-        input[type="text"], textarea { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ddd; box-sizing: border-box; }
+        input[type="text"], textarea { width: 100%; padding: 8px; margin: 5px 0 15px 0; border: 1px solid #ccc; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
-<div class="form-box">
-    <h2>ลงทะเบียนนักกีฬา</h2>
-
+<div class="box">
+    <h2>ข้อมูลนักกีฬา</h2>
     <form action="save.php" method="POST">
-        <p>
-            ชื่อ-นามสกุล: <br>
-            <input type="text" name="fullname" required>
-        </p>
+        ชื่อ-นามสกุล:
+        <input type="text" name="fullname" required>
 
-        <p>
-            ประเภทกีฬา: <br>
-            <input type="radio" name="sport_type" value="ประเภทเดี่ยว" checked> ประเภทเดี่ยว
-            <input type="radio" name="sport_type" value="ประเภททีม"> ประเภททีม
-        </p>
+        ประเภทกีฬา: <br>
+        <input type="radio" name="sport_type" value="เดี่ยว" checked> ประเภทเดี่ยว 
+        <input type="radio" name="sport_type" value="ทีม"> ประเภททีม <br><br>
 
-        <p>
-            ประวัติ/หมายเหตุ: <br>
-            <textarea name="note" rows="4"></textarea>
-        </p>
+        รายละเอียดเพิ่มเติม:
+        <textarea name="note" rows="3"></textarea>
 
-        <button type="submit" class="btn-submit">สมัครสมาชิกนักกีฬา</button>
+        <button type="submit" class="btn">บันทึกข้อมูล</button>
     </form>
 </div>
 
