@@ -41,12 +41,13 @@
         รายละเอียดเพิ่มเติม:
         <textarea name="note" rows="3"></textarea>
 
-        <button class="btn btn-info">สมัครสมาชิก</button>
+        <button type="button" class="btn btn-info">สมัคร</button>
     </form>
 </div>
 
 </body>
 </html>
+
 
 
 
