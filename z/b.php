@@ -43,10 +43,11 @@
         รายละเอียดเพิ่มเติม:
         <textarea name="note" rows="3"></textarea>
 
-        <button type="submit" class="btn-success">สมัคร</button>
+        <button type="submit" class="btn-info">สมัคร</button>
     </form>
 </div>
 
 </body>
 </html>
+
 
