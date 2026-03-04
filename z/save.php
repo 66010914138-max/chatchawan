@@ -22,8 +22,7 @@ $sql = "INSERT INTO db_athlete (fullname, phone, team_name, sport_type, note)
 if (mysqli_query($conn, $sql)) {
     // ใช้ JavaScript เพื่อโชว์ Popup ก่อนเด้งกลับ
     echo "<script>
-            alert('บันทึกข้อมูลสำเร็จแล้ว!');
-            window.location.href='a.php'; 
+            alert('บันทึกข้อมูลสำเร็จแล้ว!'); 
           </script>";
 } else {
     echo "เกิดข้อผิดพลาด: " . mysqli_error($conn);
@@ -31,3 +30,4 @@ if (mysqli_query($conn, $sql)) {
 
 mysqli_close($conn);
 ?>
+
