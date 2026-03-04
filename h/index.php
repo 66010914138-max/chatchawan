@@ -10,7 +10,7 @@
         body { background-color: #f8f9fa; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
         .login-card { width: 100%; max-width: 400px; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); background: white; }
         .btn-login { background-color: #0d6efd; border: none; width: 100%; padding: 10px; border-radius: 8px; color: white; transition: 0.3s; }
-        .btn-login:hover { background-color: #0b5ed7; }
+        .btn-login:hover { background-color: #171D25; }
     </style>
 </head>
 <body>
