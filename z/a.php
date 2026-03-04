@@ -2,16 +2,20 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <title>ระบบจัดการข้อมูลนักกีฬา</title>
+    <title>ฟอร์มบันทึกข้อมูลนักกีฬา</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Sarabun', sans-serif; margin-top: 50px; }
+        .card { border-radius: 10px; }
+    </style>
 </head>
-<body class="container mt-4">
+<body class="container">
 
-    <h2 class="text-center mb-4">ฟอร์มบันทึกข้อมูลนักกีฬา</h2>
+    <h2 class="text-center mb-5">ฟอร์มบันทึกข้อมูลนักกีฬา</h2>
 
     <div class="row">
         <div class="col-md-4">
-            <div class="card p-3 shadow-sm">
+            <div class="card shadow-sm p-3">
                 <form action="save.php" method="POST">
                     <div class="mb-3">
                         <label>ชื่อ-นามสกุล (Textbox):</label>
@@ -26,7 +30,7 @@
 
                     <div class="mb-3">
                         <label>ข้อมูลเพิ่มเติม (Textarea):</label>
-                        <textarea name="note" class="form-control" rows="3"></textarea>
+                        <textarea name="note" class="form-control" rows="4"></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100">บันทึกข้อมูล</button>
@@ -35,9 +39,9 @@
         </div>
 
         <div class="col-md-8">
-            <table class="table table-striped table-hover border">
+            <table class="table table-bordered">
                 <thead class="table-dark">
-                    <tr>
+                    <tr class="text-center">
                         <th>ID (PK)</th>
                         <th>ชื่อ-นามสกุล</th>
                         <th>ประเภท</th>
@@ -46,23 +50,21 @@
                 </thead>
                 <tbody>
                     <?php
-                    // เชื่อมต่อฐานข้อมูล
                     $conn = mysqli_connect("localhost", "root", "Golf@2004", "4138db");
-                    
-                    // คำสั่งดึงข้อมูล
+                    // ดึงข้อมูลมาแสดงตามข้อ 4
                     $sql = "SELECT * FROM db_athlete ORDER BY id DESC";
                     $result = mysqli_query($conn, $sql);
 
-                    // วนลูปแสดงข้อมูล 5 แถวหรือมากกว่าตามที่มีใน DB (โจทย์ข้อ 3)
                     while($row = mysqli_fetch_array($result)) {
+                        echo "<tr>";
+                        echo "<td class='text-center'>".$row['id']."</td>";
+                        echo "<td>".$row['fullname']."</td>";
+                        echo "<td>".$row['sport_type']."</td>";
+                        echo "<td>".$row['note']."</td>";
+                        echo "</tr>";
+                    }
+                    mysqli_close($conn);
                     ?>
-                        <tr>
-                            <td><?php echo $row['id']; ?></td>
-                            <td><?php echo $row['fullname']; ?></td>
-                            <td><?php echo $row['sport_type']; ?></td>
-                            <td><?php echo $row['note']; ?></td>
-                        </tr>
-                    <?php } ?>
                 </tbody>
             </table>
         </div>
