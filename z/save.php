@@ -5,27 +5,29 @@ if (!$conn) {
     die("เชื่อมต่อล้มเหลว: " . mysqli_connect_error());
 }
 
-// รับค่าจากฟอร์ม (แนะนำให้กรองข้อมูลเพื่อป้องกัน SQL Injection)
-$name   = mysqli_real_escape_string($conn, $_POST['fullname']);
-$phone  = mysqli_real_escape_string($conn, $_POST['phone']);
-$team   = mysqli_real_escape_string($conn, $_POST['team_name']);
-$type   = mysqli_real_escape_string($conn, $_POST['sport_type']);
-$detail = mysqli_real_escape_string($conn, $_POST['note']);
+// ตั้งค่าภาษาไทย
+mysqli_set_charset($conn, "utf8mb4");
 
-// บันทึกข้อมูลลงตาราง (เพิ่มคอลัมน์ phone และ team_name ให้ตรงกับ Database ของคุณ)
-$sql = "INSERT INTO db_athlete (fullname, phone, team_name, sport_type, note) 
-        VALUES ('$name', '$phone', '$team', '$type', '$detail')";
+// รับค่าจาก Form ให้ครบทุกตัว (สำคัญมาก!)
+$name   = $_POST['fullname'];
+$phone  = $_POST['phone'];
+$team   = $_POST['team_name'];
+$type   = $_POST['sport_type'];
+$detail = $_POST['note'];
+
+// ปรับ SQL ให้ตรงกับชื่อคอลัมน์ในรูปที่คุณส่งมา
+$sql = "INSERT INTO db_athlete (fullname, sport_type, note, phone, team_name) 
+        VALUES ('$name', '$type', '$detail', '$phone', '$team')";
 
 if (mysqli_query($conn, $sql)) {
-    // ใช้ JavaScript แสดง Alert ก่อนแล้วค่อยสั่งเปลี่ยนหน้า
-    echo "<script>
-            alert('บันทึกข้อมูลเรียบร้อยแล้ว!');
-            window.location.href='a.php';
-          </script>";
+    echo "บันทึกข้อมูลสำเร็จแล้ว!"; 
+    echo "<br><a href='a.php'>กลับหน้าหลัก</a>";
+    
+    // ลองปิดบรรทัดนี้ชั่วคราวเพื่อไม่ให้มันเด้งหนีครับ
+    // header("location: a.php"); 
 } else {
     echo "เกิดข้อผิดพลาด: " . mysqli_error($conn);
 }
 
 mysqli_close($conn);
 ?>
-
