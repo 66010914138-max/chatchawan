@@ -8,8 +8,8 @@
         .box { width: 350px; margin: auto; padding: 20px; border: 1px solid #ddd; background: #fff; border-radius: 8px; }
         h2 { text-align: center; color: #333; }
         
-        .btn-primary { 
-            background-color: #f34612; 
+        .btn-info { 
+            background-color: #2b1ea1; 
             color: white; 
             border: none; 
             padding: 10px; 
@@ -17,7 +17,7 @@
             border-radius: 4px; 
             cursor: pointer; 
         }
-        .btn-primary:hover { background-color: #af1b08; }
+        .btn-info:hover { background-color: #af1b08; }
         
         input[type="text"], textarea { width: 100%; padding: 8px; margin: 5px 0 15px 0; border: 1px solid #ccc; box-sizing: border-box; }
     </style>
@@ -49,6 +49,7 @@
 
 </body>
 </html>
+
 
 
 
