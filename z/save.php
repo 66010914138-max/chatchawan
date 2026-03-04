@@ -1,28 +1,28 @@
 <?php
-// 1. ส่วนเชื่อมต่อฐานข้อมูล (รวมจาก connect.php มาไว้ที่นี่)
+// 1. เชื่อมต่อฐานข้อมูล
 $conn = mysqli_connect("localhost", "root", "Golf@2004", "4138db");
 
 if (!$conn) {
-    die("เชื่อมต่อฐานข้อมูลล้มเหลว: " . mysqli_connect_error());
+    die("เชื่อมต่อล้มเหลว: " . mysqli_connect_error());
 }
 
-// 2. รับค่าจากหน้าฟอร์ม a.php
-$name = $_POST['fullname'];
-$type = $_POST['sport_type'];
-$detail = $_POST['note'];
+// 2. รับค่าจากฟอร์ม และป้องกันการกรอกอักขระแปลกๆ
+$name = mysqli_real_escape_string($conn, $_POST['fullname']);
+$type = mysqli_real_escape_string($conn, $_POST['sport_type']);
+$detail = mysqli_real_escape_string($conn, $_POST['note']);
 
-// 3. คำสั่ง SQL เพิ่มข้อมูลลงตาราง db_athlete
+// 3. คำสั่ง SQL เพิ่มข้อมูล (ข้อ 7)
 $sql = "INSERT INTO db_athlete (fullname, sport_type, note) VALUES ('$name', '$type', '$detail')";
 
-// 4. สั่งให้บันทึกและแจ้งผล
+// 4. บันทึกและแจ้งผลด้วย JavaScript เพื่อความสวยงาม
 if (mysqli_query($conn, $sql)) {
-    echo "<h3>บันทึกข้อมูลลงฐานข้อมูลสำเร็จ!</h3>";
-    echo "<a href='a.php'>กลับไปหน้าลงทะเบียน</a>";
+    echo "<script>
+            alert('บันทึกข้อมูลสำเร็จ!');
+            window.location.href='a.php';
+          </script>";
 } else {
-    echo "เกิดข้อผิดพลาด: " . mysqli_error($conn);
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 
-// ปิดการเชื่อมต่อ
 mysqli_close($conn);
 ?>
-
