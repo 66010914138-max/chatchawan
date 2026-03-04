@@ -6,7 +6,7 @@
     <style>
         body { font-family: "Tahoma", sans-serif; padding: 40px; background-color: #f9f9f9; }
         .box { width: 350px; margin: auto; padding: 20px; border: 1px solid #ddd; background: #fff; border-radius: 8px; }
-        h2 { text-align: center; color:#12ad8c;}
+        h2 { text-align: center; color:#12ad8c;}//เปลี่ยนสีตัวหนังสือ
         
         .btn-info { 
             background-color: #2b1ea1; //เปลี่ยนสี
@@ -49,6 +49,7 @@
 
 </body>
 </html>
+
 
 
 
