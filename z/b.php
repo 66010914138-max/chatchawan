@@ -1,3 +1,4 @@
+        
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,18 +7,22 @@
     <style>
         body { font-family: "Tahoma", sans-serif; padding: 40px; background-color: #f9f9f9; }
         .box { width: 350px; margin: auto; padding: 20px; border: 1px solid #ddd; background: #fff; border-radius: 8px; }
-        h2 { text-align: center; color:#12ad8c;}//เปลี่ยนสีตัวหนังสือ
+        h2 { text-align: center; color: #333; }
         
+        /* แก้ไขส่วนนี้เพื่อให้ปุ่มกลับมาเป็นสีส้มแดงตามเดิม */
         .btn-info { 
-            background-color: #2b1ea1; //เปลี่ยนสี
+            background-color: #f34612; /* สีส้มแดงเดิม */
             color: white; 
             border: none; 
             padding: 10px; 
             width: 100%; 
             border-radius: 4px; 
             cursor: pointer; 
+            font-size: 16px;
         }
-        .btn-info:hover { background-color: #2b1ea1; }
+        .btn-info:hover { 
+            background-color: #af1b08; /* สีจะเข้มขึ้นเมื่อเอาเมาส์วาง */
+        }
         
         input[type="text"], textarea { width: 100%; padding: 8px; margin: 5px 0 15px 0; border: 1px solid #ccc; box-sizing: border-box; }
     </style>
@@ -49,11 +54,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
