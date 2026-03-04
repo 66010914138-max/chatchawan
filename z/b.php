@@ -17,7 +17,7 @@
             border-radius: 4px; 
             cursor: pointer; 
         }
-        .btn-info:hover { background-color: #af1b08; }
+        .btn-info:hover { background-color: #2b1ea1; }
         
         input[type="text"], textarea { width: 100%; padding: 8px; margin: 5px 0 15px 0; border: 1px solid #ccc; box-sizing: border-box; }
     </style>
@@ -49,6 +49,7 @@
 
 </body>
 </html>
+
 
 
 
