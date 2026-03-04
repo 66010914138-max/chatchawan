@@ -9,7 +9,7 @@
         h2 { text-align: center; color: #333; }
         
         .btn-info { 
-            background-color: #2b1ea1; 
+            background-color: #2b1ea1; //เปลี่ยนสี
             color: white; 
             border: none; 
             padding: 10px; 
@@ -49,6 +49,7 @@
 
 </body>
 </html>
+
 
 
 
