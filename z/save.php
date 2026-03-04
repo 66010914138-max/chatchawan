@@ -17,11 +17,15 @@ $sql = "INSERT INTO db_athlete (fullname, phone, team_name, sport_type, note)
         VALUES ('$name', '$phone', '$team', '$type', '$detail')";
 
 if (mysqli_query($conn, $sql)) {
-    // บันทึกเสร็จแล้วให้กลับไปหน้า a.php
-    echo "<script>alert('ลงทะเบียนสำเร็จ'); window.location='a.php';</script>";
+    // ใช้ JavaScript แสดง Alert ก่อนแล้วค่อยสั่งเปลี่ยนหน้า
+    echo "<script>
+            alert('บันทึกข้อมูลเรียบร้อยแล้ว!');
+            window.location.href='a.php';
+          </script>";
 } else {
     echo "เกิดข้อผิดพลาด: " . mysqli_error($conn);
 }
 
 mysqli_close($conn);
 ?>
+
