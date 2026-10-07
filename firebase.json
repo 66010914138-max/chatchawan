@@ -1,0 +1,25 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "msu-food-4fde3",
+          "appId": "1:507131538645:android:e19340f8e16d39c71a065c",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "msu-food-4fde3",
+          "configurations": {
+            "android": "1:507131538645:android:e19340f8e16d39c71a065c",
+            "ios": "1:507131538645:ios:216f211e1c54a7421a065c"
+          }
+        }
+      }
+    }
+  },
+  "storage": {
+    "rules": "storage.rules"
+  }
+}
